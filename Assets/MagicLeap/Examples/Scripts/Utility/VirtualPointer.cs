@@ -46,10 +46,11 @@ namespace MagicLeap
         private bool _isGrabbing = false;
 
         private GameObject[] islands;
+        private GameObject cube;
         #endregion // Private Properties
 
         #region Unity Methods
-        private void Awake()
+        void Awake()
         {
             if (_controllerConnectionHandler == null)
             {
@@ -60,17 +61,24 @@ namespace MagicLeap
 
             islands = new GameObject[5];
             for (int i = 1; i <= 5; i++)
-            {
-                islands[i] = GameObject.Find("GameObject" + i);
+            {   if (GameObject.Find("GameObject" + i) != null) 
+                {
+                    Debug.Log("Gameobject" + i + "created!");
+                    Debug.unityLogger.Log("islands", "Gameobject" + i + " created!");
+                    islands[i-1] = GameObject.Find("GameObject" + i);
+                }
             }
 
             MLInput.OnControllerButtonDown += HandleControllerButtonDown;
             MLInput.OnControllerButtonUp += HandleControllerButtonUp;
             MLInput.OnTriggerDown += HandleTriggerDown;
             MLInput.OnTriggerUp += HandleTriggerUp;
+
+            //cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            //cube.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         }
 
-        private void OnDestroy()
+        void OnDestroy()
         {
             MLInput.OnControllerButtonDown -= HandleControllerButtonDown;
             MLInput.OnControllerButtonUp -= HandleControllerButtonUp;
@@ -78,37 +86,68 @@ namespace MagicLeap
             MLInput.OnTriggerUp -= HandleTriggerUp;
         }
 
-        private void Update()
+        void Update()
         {
             if (!_isGrabbing)
             {
                 RaycastHit[] hit = new RaycastHit[1];
                 // RayCast
                 // RayCastAll
+               // Debug.Log(_pointerRay.position);
+                //Debug.Log(_pointerRay.forward);
+                
+                //cube.transform.position = _pointerRay.position + _pointerRay.forward;
+
+                //RaycastHit hit1;
+                // Does the ray intersect any objects excluding the player layer
+                //if (Physics.Raycast(_pointerRay.position, _pointerRay.forward, out hit1, Mathf.Infinity))
+                //{
+
+                //    Debug.Log("Did Hit");
+                //}
+
                 if (Physics.RaycastNonAlloc(_pointerRay.position, _pointerRay.forward, hit) > 0)
                 {
                     //MediaPlayerButton wb = hit[0].transform.GetComponent<MediaPlayerButton>();
+                    Debug.Log("Did Hit2");
 
-                    GameObject g = hit[0].transform.gameObject; //  "GrameObject1-5"
-                    GameObject g_parent = g.transform.parent.gameObject; // "Scene"
-
-                    while (g_parent.transform.parent.gameObject.name != "Scene")
+                    if (hit[0].transform && hit[0].transform.gameObject)
                     {
-                        g = g_parent;
-                        g_parent = g.transform.parent.gameObject;
+
+                        GameObject g = hit[0].transform.gameObject; //  "GrameObject1-5"
+                        Debug.Log("g:" + g.name);
+                        GameObject g_parent = null;
+                        if (g.transform.parent && g.transform.parent.gameObject)
+                        {
+                            g_parent = g.transform.parent.gameObject; // "Scene"
+                            Debug.Log("g_parent:" + g_parent.name);
+
+                            //Debug.unityLogger.Log("islands", "initial g:" + g.name);
+                        }
+                        else {
+                            Debug.Log("No parent");
+                        }
+                        while (g_parent && g_parent.name != "Scene")
+                        {
+                            g = g_parent;
+                            g_parent = g.transform.parent.gameObject;
+                        }
+                        Debug.Log("g:" + g.name);
+
+                        // g should have the full island
+                        // Outline of the full island
+                        Outline o = g.GetComponent<Outline>();
+
+                        // Check for null
+                        if (o != null)
+                        {
+                            Debug.Log("Hit " + hit[0].collider.gameObject.name);
+                            if (!o.isActiveAndEnabled)
+                                o.enabled = true;
+                        }
+                    } else {
+
                     }
-
-                    // g should have the full island
-                    // Outline of the full island
-                    Outline o = g.GetComponent<Outline>();
-
-                    // Check for null
-                    if (o != null) {
-                        Debug.Log("Hit " + hit[0].collider.gameObject.name);
-                        if (!o.isActiveAndEnabled)
-                            o.enabled = true;
-                    }
-
 
 
                     //if (wb != null)
@@ -154,25 +193,27 @@ namespace MagicLeap
                 }
                 else
                 {
-                    Debug.Log("Did not hit");
                     //_lastButtonHit = null;
                     ClearPointer();
 
                     //clear all outlines
-                    foreach (GameObject island in islands) 
+                    foreach (GameObject island in islands)
                     {
                         Outline outline = island.GetComponent<Outline>();
-                        if (outline.isActiveAndEnabled) 
+                        if (outline.isActiveAndEnabled)
                         {
                             Debug.Log("Clear outline of " + island.name);
                             outline.enabled = false;
                         }
                     }
-                    
+
                 }
             }
             else if (_isGrabbing)
             {
+                Debug.Log("isgrabbing");
+                Debug.unityLogger.Log("islands", "Isgrabbing");
+
                 // _isGrabbing already guarantees that _lastButtonHit is not null
                 // but just in case the actual button gets destroyed in
                 // the middle of the grab, let's still check
@@ -200,7 +241,7 @@ namespace MagicLeap
             Vector3 pointerScale = _pointerRay.localScale;
             pointerScale.z = 1.0f;
             _pointerRay.localScale = pointerScale;
-            
+
             _pointerLight.transform.position = transform.position;
             _pointerLight.color = _pointerLightColorNoHit;
         }

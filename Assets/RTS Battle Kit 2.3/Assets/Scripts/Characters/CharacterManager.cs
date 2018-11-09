@@ -393,7 +393,7 @@ public class CharacterManager : MonoBehaviour {
 				rectTransform.SetParent(characterList.transform, false);
 			
 				//set button outline
-				newButton.GetComponent<Outline>().effectColor = buttonHighlight;
+				//newButton.GetComponent<Outline>().effectColor = buttonHighlight;
 			
 				//set the correct button sprite
 				newButton.gameObject.GetComponent<Image>().sprite = troops[i].buttonImage;
