@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: 502a28941fd79f54aa27582960581c77
-timeCreated: 1485959245
-licenseType: Store
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: chest
     100002: foot.L
@@ -94,26 +92,89 @@ ModelImporter:
     7400016: knight mesh|Running.001
     9500000: //RootNode
     13700000: knight mesh
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shield cavalry
+    second: {fileID: 2100000, guid: 16d424230f66e3b43a8631817470ed61, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: knight boots
+    second: {fileID: 2100000, guid: 5d3f8b2d0a728c34994817187afa9e1b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: knight chain mail
+    second: {fileID: 2100000, guid: e3e48a51d838bf842826a7109359cf6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: knight helmet
+    second: {fileID: 2100000, guid: 36e8abe242b1ba341a8ef8b2a04d8082, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: knight helmet 1
+    second: {fileID: 2100000, guid: 61f6fec78b8456f4ea928853159f6e23, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: knight shirt
+    second: {fileID: 2100000, guid: a7c79622b1a185d4e8c1616765fd024b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: knight skin
+    second: {fileID: 2100000, guid: f38b56e39981a8643a3fabe411cb740b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lance
+    second: {fileID: 2100000, guid: e96dff9450a80914a81a5a049787099e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lance front
+    second: {fileID: 2100000, guid: 17b8127cacc10e340981796c04c2d249, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lance gold
+    second: {fileID: 2100000, guid: 302e0980e7b7cd342bd87dcedd43f25d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lance metal
+    second: {fileID: 2100000, guid: ffa17f34361f470408e168e1a304f156, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: Attacking
@@ -317,13 +378,18 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -333,6 +399,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

@@ -108,12 +108,12 @@ public class ControllerScript : MonoBehaviour
 
             _beginAnimation = true;
 
-            GameObject newObject = Instantiate(cloneObject);
+            //GameObject newObject = Instantiate(cloneObject);
 
             // transform tutorial
             // unity tutorial
 
-            newObject.transform.parent = GameObject.Find("GameObject1").transform;
+            //newObject.transform.parent = GameObject.Find("GameObject1").transform;
         }
 
 
